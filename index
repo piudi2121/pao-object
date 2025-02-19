@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino do Major System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Treino do Major System - 00 a 99</h1>
+    <p id="question"></p>
+    <input type="text" id="answer" placeholder="Digite a imagem associada">
+    <button onclick="checkAnswer()">Verificar</button>
+    <p id="feedback"></p>
+    <p id="score">Pontuação: 0</p>
+    <script>
+        const majorSystem = {
+            0: "siso", 1: "azeite", 2: "Sino", 3: "Samambaia", 4: "sorvete", 5: "Sol", 6: "Sujeira", 7: "sock", 8: "Sofá", 9: "Sabão",
+            10: "Taça", 11: "Dado", 12: "DNA", 13: "timão", 14: "torta", 15: "toalha", 16: "tocha", 17: "taco", 18: "TV", 19: "tablet",
+            20: "Noz", 21: "Nota", 22: "ananás", 23: "anemona", 24: "Nori", 25: "Anel", 26: "Nacho", 27: "Nokia", 28: "Navio", 29: "Nabo",
+            30: "Maçã", 31: "Moeda", 32: "moon", 33: "mamadeira", 34: "Amora", 35: "mola", 36: "miojo", 37: "Maca", 38: "mofo", 39: "mapa",
+            40: "Rosa", 41: "rádio", 42: "Ranho", 43: "remo", 44: "arara", 45: "Orelha", 46: "Rojão", 47: "Arco", 48: "Erva", 49: "ruby",
+            50: "Lousa", 51: "lata", 52: "linux", 53: "elmo", 54: "Lira", 55: "Lula", 56: "Lixo", 57: "LEGO", 58: "Luva", 59: "Lupa",
+            60: "gesso", 61: "Jato", 62: "chain", 63: "Chama", 64: "Jarra", 65: "Gelo", 66: "Chuchu", 67: "Jaca", 68: "Chave", 69: "Chapéu",
+            70: "Casa", 71: "Gaita", 72: "canhão", 73: "Cama", 74: "coroa", 75: "agulha", 76: "caixão", 77: "cookie", 78: "café", 79: "copo",
+            80: "foice", 81: "foto", 82: "OVNI", 83: "vomito", 84: "Ferro", 85: "Violão", 86: "Feijão", 87: "faca", 88: "favo", 89: "FBI",
+            90: "poção", 91: "Botão", 92: "piano", 93: "aipim", 94: "burca", 95: "bolo", 96: "bucha", 97: "ábaco", 98: "puff", 99: "Pipa"
+        };
+        
+        let score = 0;
+        let attempts = 0;
+        let currentNumber;
+        
+        function newQuestion() {
+            const keys = Object.keys(majorSystem);
+            currentNumber = keys[Math.floor(Math.random() * keys.length)];
+            document.getElementById("question").innerText = `Qual é a imagem associada ao número ${currentNumber}?`;
+            document.getElementById("answer").value = "";
+            document.getElementById("feedback").innerText = "";
+        }
+        
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+            const correctAnswer = majorSystem[currentNumber].toLowerCase();
+            
+            if (userAnswer === correctAnswer) {
+                document.getElementById("feedback").innerText = "✔ Correto!";
+                document.getElementById("feedback").style.color = "green";
+                score++;
+            } else {
+                document.getElementById("feedback").innerText = `✘ Errado! A resposta correta é '${majorSystem[currentNumber]}'`;
+                document.getElementById("feedback").style.color = "red";
+            }
+            
+            attempts++;
+            document.getElementById("score").innerText = `Pontuação: ${score} de ${attempts}`;
+            setTimeout(newQuestion, 1500);
+        }
+        
+        newQuestion();
+    </script>
+</body>
+</html>
